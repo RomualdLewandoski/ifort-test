@@ -58,7 +58,7 @@ class Eleve extends Model
         return match ($this->statutInscription) {
             'en_attente' => 'statut-en-attente',
             'validee' => 'statut-validee',
-            'dossier_incomplet' => 'statut-incomplet',
+            'dossier_incomplet' => 'statut-dossier-incomplet',
             'annulee' => 'statut-annulee',
             default => 'statut-en-attente',
         };
