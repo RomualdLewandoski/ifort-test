@@ -5,6 +5,9 @@ namespace App\View\Components;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\View\Component;
 
+/**
+ * Component de pagination
+ */
 class Pagination extends Component
 {
     public Paginator $paginator;
