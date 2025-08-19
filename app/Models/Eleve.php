@@ -41,4 +41,28 @@ class Eleve extends Model
         'created_at' => 'datetime',
         'updated_at' => 'datetime'
     ];
+
+    public function getStatutInscriptionLabelAttribute() :string
+    {
+        return match ($this->statutInscription){
+            'en_attente' => 'En attente',
+            'validee' => 'Validée',
+            'dossier_incomplet' => 'Dossier incomplet',
+            'annulee' => 'Annulée',
+            default => 'En attente'
+        };
+    }
+
+    public function getStatutInscriptionClassAttribute(): string
+    {
+        return match ($this->statutInscription) {
+            'en_attente' => 'status-en-attente',
+            'validee' => 'status-validee',
+            'dossier_incomplet' => 'status-incomplet',
+            'annulee' => 'status-annulee',
+            default => 'status-en-attente',
+        };
+    }
+
+
 }
