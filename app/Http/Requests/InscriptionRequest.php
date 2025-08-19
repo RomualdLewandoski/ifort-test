@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class InscriptionRequest extends FormRequest
 {
@@ -23,7 +24,7 @@ class InscriptionRequest extends FormRequest
     {
         return [
             'nomPrenom' => ['required','string','max:255'], //nomPrenom n'est pas unique, car il peut y avoir des homonymes
-            'email' => ['required', 'email','max:255', 'unique:eleves'],
+            'email' => ['required', 'email','max:255', Rule::unique('eleves')->ignore($this->route('eleve'))],
             'telephone' => ['required', 'regex:/^(0\d{9}|\+[1-9]\d{7,14})$/','min:10','max:15'],//min 10 = format national, max 15 = format international
             'dateInscription' => ['required', 'date'],
             'statutInscription' => ['required', 'in:en_attente,validee,dossier_incomplet,annulee'],

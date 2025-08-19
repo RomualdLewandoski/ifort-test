@@ -68,12 +68,19 @@
                     <td>{{ $eleve->dateInscription->format('d/m/Y') }}</td>
                     <td><span class="badge">{{ $eleve->getStatutInscriptionLabelAttribute() }}</span></td>
                     <td class="actions">
-                        <a href="">Modifier</a>
+                        <a href="{{route('eleve.edit', $eleve->id)}}">Modifier</a>
                         <a href="#"
-                           onclick="event.preventDefault(); if(confirm('Supprimer cet élève ?')) { document.getElementById('delete-{{ $eleve->id }}').submit(); }">
+                           onclick="event.preventDefault();
+                            if(confirm('Supprimer cet élève ?')) {
+                                document.getElementById('delete-{{ $eleve->id }}').submit();
+                            }"
+                        >
                             Supprimer
                         </a>
-                        <form id="delete-{{ $eleve->id }}" action="" method="POST" style="display:none;">
+
+                        <form id="delete-{{ $eleve->id }}"
+                              action="{{ route('eleve.delete', $eleve) }}"
+                              method="POST" style="display:none">
                             @csrf
                             @method('DELETE')
                         </form>
