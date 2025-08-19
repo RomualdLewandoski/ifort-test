@@ -12,7 +12,7 @@
     --text-color: #333;
     --white-color: #FFF;
     --border-radius: 8px;
-    --shadow: 0 4px 6px rgba(0,0,0,0.1);
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
     --status-validee: #28a745;
     --status-en-attente: #ffc107;
@@ -159,17 +159,34 @@ tbody tr:hover {
 }
 
 .badge {
+    display: inline-block;
     padding: 5px 10px;
-    border-radius: 15px;
-    font-size: 0.8em;
+    font-size: 0.85rem;
     font-weight: 600;
+    line-height: 1;
     color: var(--white-color);
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    border-radius: 15px;
 }
 
-.statut-validee .badge { background-color: var(--status-validee); }
-.statut-en-attente .badge { background-color: var(--status-en-attente); color: #333; }
-.statut-dossier-incomplet .badge { background-color: var(--status-incomplet); }
-.statut-annulee .badge { background-color: var(--status-annulee); }
+.statut-validee .badge {
+    background-color: var(--status-validee);
+}
+
+.statut-en-attente .badge {
+    background-color: var(--status-en-attente);
+    color: #333;
+}
+
+.statut-dossier-incomplet .badge {
+    background-color: var(--status-incomplet);
+}
+
+.statut-annulee .badge {
+    background-color: var(--status-annulee);
+}
 
 .actions a {
     color: var(--primary-color);

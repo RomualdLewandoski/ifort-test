@@ -51,10 +51,12 @@
                     <td><span class="badge">{{ $eleve->getStatutInscriptionLabelAttribute() }}</span></td>
                     <td class="actions">
                         <a href="">Modifier</a>
-                        <form action="" method="POST" style="display:inline">
+                        <a href="#" onclick="event.preventDefault(); if(confirm('Supprimer cet élève ?')) { document.getElementById('delete-{{ $eleve->id }}').submit(); }">
+                            Supprimer
+                        </a>
+                        <form id="delete-{{ $eleve->id }}" action="" method="POST" style="display:none;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" onclick="return confirm('Supprimer cet élève ?')">Supprimer</button>
                         </form>
                     </td>
                 </tr>
