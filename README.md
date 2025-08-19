@@ -1,3 +1,49 @@
+# A destination d'IFORT
+
+Ce repo contient le test technique demandé.
+
+## Information techniques :
+
+- Version de laravel : ``12.25.0``
+- Version de nodeJs : ``22.18.0``
+- Version de npm : ``10.9.3``
+- Version de php : ``8.2.^``
+
+## Installation 
+
+### Installation manuelle
+
+- Télécharger le repo github [cloner](https://github.com/RomualdLewandoski/ifort-test/archive/refs/heads/master.zip)
+- OU cloner le repo :
+```bash
+git clone https://github.com/RomualdLewandoski/ifort-test.git
+```
+
+- Avoir php 8.2 ainsi que nodejs 
+- effectuer les commandes suivantes : 
+```bash
+cd <dossier>
+cp .env.example .env
+#Linux/MacOs
+touch database/database.sqlite 
+#Windows
+ni database/database.sqlite -Force
+composer install
+npm install
+php artisan migrate
+```
+- configurer le .env ``DB_CONNECTION=sqlite``
+- Pour lancer le projet : 
+```bash
+npm run build
+php artisan serve
+```
+
+### Installation avec docker
+
+Le repo contient le nécessaire pour créer une image docker s'occupant de lancer le projet
+<doc a ajouter une fois le docker fait>
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
