@@ -4,12 +4,26 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\InscriptionRequest;
 use App\Models\Eleve;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Application;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
+/**
+ * Controller en charge de la gestion des élèves.
+ */
 class EleveController extends Controller
 {
-    public function toggleStar(Eleve $eleve, Request $request)
+    /**
+     * Fonction en charge de marquer/retirer un élève comme prioritaire.
+     *
+     * @param Eleve $eleve
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function toggleStar(Eleve $eleve, Request $request): RedirectResponse
     {
         try {
             $eleve->update(['estPrioritaire' => !$eleve->estPrioritaire]);
@@ -26,12 +40,25 @@ class EleveController extends Controller
         }
     }
 
-    public function edit(Eleve $eleve)
+    /**
+     * Affichage du formulaire d'édition d'un élève.
+     *
+     * @param Eleve $eleve
+     * @return Factory|View|Application
+     */
+    public function edit(Eleve $eleve): Factory|Application|View
     {
         return view('formulaire', compact('eleve'));
     }
 
-    public function update(Eleve $eleve, InscriptionRequest $request)
+    /**
+     * Fonction en charge de sauvegarder les modifications d'un élève.
+     *
+     * @param Eleve $eleve
+     * @param InscriptionRequest $request
+     * @return RedirectResponse|null
+     */
+    public function update(Eleve $eleve, InscriptionRequest $request): RedirectResponse|null
     {
         try {
             $data = $request->validated();
@@ -52,7 +79,14 @@ class EleveController extends Controller
         }
     }
 
-    public function destroy(Eleve $eleve, Request $request)
+    /**
+     * Fonction en charge de supprimer un élève.
+     *
+     * @param Eleve $eleve
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function destroy(Eleve $eleve, Request $request): RedirectResponse
     {
         try {
             $eleve->delete();
