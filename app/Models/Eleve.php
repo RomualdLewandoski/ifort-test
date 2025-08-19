@@ -56,13 +56,30 @@ class Eleve extends Model
     public function getStatutInscriptionClassAttribute(): string
     {
         return match ($this->statutInscription) {
-            'en_attente' => 'status-en-attente',
-            'validee' => 'status-validee',
-            'dossier_incomplet' => 'status-incomplet',
-            'annulee' => 'status-annulee',
-            default => 'status-en-attente',
+            'en_attente' => 'statut-en-attente',
+            'validee' => 'statut-validee',
+            'dossier_incomplet' => 'statut-incomplet',
+            'annulee' => 'statut-annulee',
+            default => 'statut-en-attente',
         };
     }
 
+    public function scopeSearch($query, ?string $value)
+    {
+        if (!empty($value)) {
+            $query->where(function ($q) use ($value) {
+                $q->where('nomPrenom', 'like', "%{$value}%")
+                    ->orWhere('email', 'like', "%{$value}%");
+            });
+        }
+        return $query;
+    }
 
+    public function scopeStatut($query, ?string $statut)
+    {
+        if (!empty($statut)) {
+            $query->where('statutInscription', $statut);
+        }
+        return $query;
+    }
 }
