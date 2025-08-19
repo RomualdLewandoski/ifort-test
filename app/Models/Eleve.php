@@ -42,6 +42,10 @@ class Eleve extends Model
         'updated_at' => 'datetime'
     ];
 
+    /**
+     * Fonction de récupération du label correspondant au statut du dossier de l'élève
+     * @return string
+     */
     public function getStatutInscriptionLabelAttribute() :string
     {
         return match ($this->statutInscription){
@@ -53,6 +57,10 @@ class Eleve extends Model
         };
     }
 
+    /**
+     * Fonction de récupération du nom de la class css correspondant au statut du dossier de l'élève
+     * @return string
+     */
     public function getStatutInscriptionClassAttribute(): string
     {
         return match ($this->statutInscription) {
@@ -64,6 +72,12 @@ class Eleve extends Model
         };
     }
 
+    /**
+     * Scope de recherche d'élève par nom ou email
+     * @param $query
+     * @param string|null $value la chaine de caractères à rechercher
+     * @return mixed
+     */
     public function scopeSearch($query, ?string $value)
     {
         if (!empty($value)) {
@@ -75,6 +89,12 @@ class Eleve extends Model
         return $query;
     }
 
+    /**
+     * Scope de recherche d'élève par statut
+     * @param $query
+     * @param string|null $statut le statut à rechercher
+     * @return mixed
+     */
     public function scopeStatut($query, ?string $statut)
     {
         if (!empty($statut)) {
