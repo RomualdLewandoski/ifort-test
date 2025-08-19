@@ -9,5 +9,6 @@ class ListeController extends Controller
     public function index(Request $request)
     {
         //todo return front end here
+        return view('liste');
     }
 }
