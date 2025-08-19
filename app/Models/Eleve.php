@@ -56,11 +56,11 @@ class Eleve extends Model
     public function getStatutInscriptionClassAttribute(): string
     {
         return match ($this->statutInscription) {
-            'en_attente' => 'status-en-attente',
-            'validee' => 'status-validee',
-            'dossier_incomplet' => 'status-incomplet',
-            'annulee' => 'status-annulee',
-            default => 'status-en-attente',
+            'en_attente' => 'statut-en-attente',
+            'validee' => 'statut-validee',
+            'dossier_incomplet' => 'statut-incomplet',
+            'annulee' => 'statut-annulee',
+            default => 'statut-en-attente',
         };
     }
 

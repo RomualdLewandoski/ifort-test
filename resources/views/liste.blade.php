@@ -36,39 +36,66 @@
             </tr>
             </thead>
             <tbody>
-            <tr class="statut-validee">
-                <td class="priorite"><button title="Mettre en avant">☆</button></td>
-                <td>Alice Martin</td>
-                <td>alice.martin@email.com</td>
-                <td>15/07/2025</td>
-                <td><span class="badge">Validée</span></td>
-                <td class="actions">
-                    <a href="#">Modifier</a>
-                    <a href="#">Supprimer</a>
-                </td>
-            </tr>
-            <tr class="statut-en-attente prioritaire">
-                <td class="priorite"><button title="Retirer la priorité" class="active">★</button></td>
-                <td>Bob Lejeune</td>
-                <td>bob.lejeune@email.com</td>
-                <td>12/07/2025</td>
-                <td><span class="badge">En attente</span></td>
-                <td class="actions">
-                    <a href="#">Modifier</a>
-                    <a href="#">Supprimer</a>
-                </td>
-            </tr>
-            <tr class="statut-dossier-incomplet">
-                <td class="priorite"><button title="Mettre en avant">☆</button></td>
-                <td>Carole Durand</td>
-                <td>carole.durand@email.com</td>
-                <td>10/07/2025</td>
-                <td><span class="badge">Dossier incomplet</span></td>
-                <td class="actions">
-                    <a href="#">Modifier</a>
-                    <a href="#">Supprimer</a>
-                </td>
-            </tr>
+            @forelse($eleves as $eleve)
+                <tr class="{{ $eleve->getStatutInscriptionClassAttribute() }} {{ $eleve->estPrioritaire ? 'prioritaire' : '' }}">
+                    <td class="priorite">
+                        @if($eleve->estPrioritaire)
+                            <button title="Retirer la priorité" class="active">★</button>
+                        @else
+                            <button title="Mettre en avant">☆</button>
+                        @endif
+                    </td>
+                    <td>{{ $eleve->nomPrenom }}</td>
+                    <td>{{ $eleve->email }}</td>
+                    <td>{{ $eleve->dateInscription->format('d/m/Y') }}</td>
+                    <td><span class="badge">{{ $eleve->getStatutInscriptionLabelAttribute() }}</span></td>
+                    <td class="actions">
+                        <a href="">Modifier</a>
+                        <form action="" method="POST" style="display:inline">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" onclick="return confirm('Supprimer cet élève ?')">Supprimer</button>
+                        </form>
+                    </td>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="6">Aucun élève trouvé</td>
+                </tr>
+            @endforelse
+{{--            <tr class="statut-validee">--}}
+{{--                <td class="priorite"><button title="Mettre en avant">☆</button></td>--}}
+{{--                <td>Alice Martin</td>--}}
+{{--                <td>alice.martin@email.com</td>--}}
+{{--                <td>15/07/2025</td>--}}
+{{--                <td><span class="badge">Validée</span></td>--}}
+{{--                <td class="actions">--}}
+{{--                    <a href="#">Modifier</a>--}}
+{{--                    <a href="#">Supprimer</a>--}}
+{{--                </td>--}}
+{{--            </tr>--}}
+{{--            <tr class="statut-en-attente prioritaire">--}}
+{{--                <td class="priorite"><button title="Retirer la priorité" class="active">★</button></td>--}}
+{{--                <td>Bob Lejeune</td>--}}
+{{--                <td>bob.lejeune@email.com</td>--}}
+{{--                <td>12/07/2025</td>--}}
+{{--                <td><span class="badge">En attente</span></td>--}}
+{{--                <td class="actions">--}}
+{{--                    <a href="#">Modifier</a>--}}
+{{--                    <a href="#">Supprimer</a>--}}
+{{--                </td>--}}
+{{--            </tr>--}}
+{{--            <tr class="statut-dossier-incomplet">--}}
+{{--                <td class="priorite"><button title="Mettre en avant">☆</button></td>--}}
+{{--                <td>Carole Durand</td>--}}
+{{--                <td>carole.durand@email.com</td>--}}
+{{--                <td>10/07/2025</td>--}}
+{{--                <td><span class="badge">Dossier incomplet</span></td>--}}
+{{--                <td class="actions">--}}
+{{--                    <a href="#">Modifier</a>--}}
+{{--                    <a href="#">Supprimer</a>--}}
+{{--                </td>--}}
+{{--            </tr>--}}
             </tbody>
         </table>
     </div>
