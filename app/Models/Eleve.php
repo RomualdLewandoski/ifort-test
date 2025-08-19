@@ -64,5 +64,22 @@ class Eleve extends Model
         };
     }
 
+    public function scopeSearch($query, ?string $value)
+    {
+        if (!empty($value)) {
+            $query->where(function ($q) use ($value) {
+                $q->where('nomPrenom', 'like', "%{$value}%")
+                    ->orWhere('email', 'like', "%{$value}%");
+            });
+        }
+        return $query;
+    }
 
+    public function scopeStatut($query, ?string $statut)
+    {
+        if (!empty($statut)) {
+            $query->where('statutInscription', $statut);
+        }
+        return $query;
+    }
 }

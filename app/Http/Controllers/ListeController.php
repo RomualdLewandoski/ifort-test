@@ -9,8 +9,13 @@ class ListeController extends Controller
 {
     public function index(Request $request)
     {
-        $eleves = Eleve::orderBy('estPrioritaire', 'desc')
-            ->orderBy('dateInscription', 'desc')->paginate(10);
+        $eleves = Eleve::query()
+            ->search($request->input('query'))
+            ->statut($request->input('statutInscription'))
+            ->orderByDesc('estPrioritaire')
+            ->orderByDesc('dateInscription')
+            ->paginate(10)
+            ->appends($request->query());
         return view('liste', compact('eleves'));
     }
 }
