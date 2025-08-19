@@ -198,4 +198,30 @@ tr.prioritaire {
     font-weight: 600;
 }
 
+.alert {
+    padding: 12px 16px;
+    margin-bottom: 16px;
+    border-radius: 6px;
+    font-size: 0.95rem;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    color: #842029;
+    border: 1px solid #f5c2c7;
+}
+
+.error {
+    display: block;
+    margin-top: 4px;
+    font-size: 0.85rem;
+    color: #dc3545;
+}
+
+input.is-invalid,
+select.is-invalid {
+    border-color: #dc3545;
+    background-color: #f8d7da33;
+}
+
 
