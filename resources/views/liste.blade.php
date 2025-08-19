@@ -18,12 +18,17 @@
         <div class="filters">
             <select name="statutInscription">
                 <option value="">Tous les statuts</option>
-                <option value="validee" {{ request('statutInscription')==='validee' ? 'selected' : '' }}>Validée</option>
-                <option value="en_attente" {{ request('statutInscription')==='en_attente' ? 'selected' : '' }}>En attente</option>
-                <option value="dossier_incomplet" {{ request('statutInscription')==='dossier_incomplet' ? 'selected' : '' }}>
+                <option value="validee" {{ request('statutInscription')==='validee' ? 'selected' : '' }}>Validée
+                </option>
+                <option value="en_attente" {{ request('statutInscription')==='en_attente' ? 'selected' : '' }}>En
+                    attente
+                </option>
+                <option
+                    value="dossier_incomplet" {{ request('statutInscription')==='dossier_incomplet' ? 'selected' : '' }}>
                     Dossier incomplet
                 </option>
-                <option value="annulee" {{ request('statutInscription')==='annulee' ? 'selected' : '' }}>Annulée</option>
+                <option value="annulee" {{ request('statutInscription')==='annulee' ? 'selected' : '' }}>Annulée
+                </option>
             </select>
         </div>
 
@@ -48,11 +53,15 @@
             @forelse($eleves as $eleve)
                 <tr class="{{ $eleve->getStatutInscriptionClassAttribute() }} {{ $eleve->estPrioritaire ? 'prioritaire' : '' }}">
                     <td class="priorite">
-                        @if($eleve->estPrioritaire)
-                            <button title="Retirer la priorité" class="active">★</button>
-                        @else
-                            <button title="Mettre en avant">☆</button>
-                        @endif
+                        <form action="{{ route('eleve.star', $eleve) }}?{{ http_build_query(request()->query()) }}"
+                              method="POST" style="display:inline">
+                            @csrf
+                            @method('PATCH')
+                            <button title="{{ $eleve->estPrioritaire ? 'Retirer la priorité' : 'Mettre en avant' }}"
+                                    class="{{ $eleve->estPrioritaire ? 'active' : '' }}">
+                                {{ $eleve->estPrioritaire ? '★' : '☆' }}
+                            </button>
+                        </form>
                     </td>
                     <td>{{ $eleve->nomPrenom }}</td>
                     <td>{{ $eleve->email }}</td>
@@ -60,7 +69,8 @@
                     <td><span class="badge">{{ $eleve->getStatutInscriptionLabelAttribute() }}</span></td>
                     <td class="actions">
                         <a href="">Modifier</a>
-                        <a href="#" onclick="event.preventDefault(); if(confirm('Supprimer cet élève ?')) { document.getElementById('delete-{{ $eleve->id }}').submit(); }">
+                        <a href="#"
+                           onclick="event.preventDefault(); if(confirm('Supprimer cet élève ?')) { document.getElementById('delete-{{ $eleve->id }}').submit(); }">
                             Supprimer
                         </a>
                         <form id="delete-{{ $eleve->id }}" action="" method="POST" style="display:none;">
