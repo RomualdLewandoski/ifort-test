@@ -20,7 +20,7 @@
                 <option value="dossier_incomplet">Dossier incomplet</option>
             </select>
         </div>
-        <a href="formulaire.html" class="btn btn-primary">Ajouter une inscription</a>
+        <a href="{{route('ajouter')}}" class="btn btn-primary">Ajouter une inscription</a>
     </div>
 
     <div class="listing-container">
